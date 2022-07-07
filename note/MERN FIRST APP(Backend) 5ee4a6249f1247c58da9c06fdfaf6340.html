@@ -1,0 +1,708 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MERN FIRST APP(Backend)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="738d9f9d-edb5-46cb-8169-a8e9e02b7708" class="page sans"><header><h1 class="page-title">MERN FIRST APP(Backend)</h1></header><div class="page-body"><p id="49f30a37-0a7f-49bb-9d00-3af16ce98a17" class="">create 2 folders (server, client)</p><ul id="c7a215ee-d7bb-4b41-abd2-3291b6b93c01" class="bulleted-list"><li style="list-style-type:disc">in order to seperate backend(nodejs, mongodb, express) and frontend</li></ul><p id="ee80728c-8243-4a08-a6b5-fbc531335c24" class="">
+</p><h2 id="ea33c482-6b0a-4ad3-8eee-88ff642ea121" class="">Server Folder</h2><ol type="1" id="fe91844b-31f9-4639-937f-fdc8b1da527f" class="numbered-list" start="1"><li>cd server</li></ol><ol type="1" id="e434b5ee-1783-4210-bd7b-67de49bb08d9" class="numbered-list" start="2"><li>type <strong>‘npm init -y</strong>’ → initialize an express application inside of ‘server’ folder. → generate ‘<strong>package.json</strong>’ file</li></ol><ol type="1" id="e936cce6-8ffc-491c-a125-1c377c6c9031" class="numbered-list" start="3"><li>type ‘<strong>npm install express mongoose cors nodemon</strong>’ → install different dependencies and the packages<ol type="a" id="d209c08c-921f-428d-b86f-379aaa859f5f" class="numbered-list" start="1"><li>mongoose ⇒ database와 communicate 하기위한 library…?</li></ol><ol type="a" id="d094f8ab-e9d9-4c5a-b0d7-a84711eaa284" class="numbered-list" start="2"><li>cors ⇒ it makes connection b/w react app and backend</li></ol><ol type="a" id="87519cca-8cdc-4292-a9d4-43545af59bca" class="numbered-list" start="3"><li>nodemon ⇒ in order to develop faster.</li></ol><p id="a1cef3e9-c9be-4720-b73f-257b3bf2b8ae" class="">
+</p></li></ol><h2 id="360c1ec2-daca-4f52-a1ae-dc3e19633c32" class="">Let’s create first file</h2><p id="4a9645ba-d1f5-493d-ab4b-81e19e857952" class="">create ‘<strong>index.js</strong>’ in server folder <div class="indented"><p id="648f413b-d1f6-4921-96b5-0ed9abec5a6d" class="">→ this will be the entry point of our api.</p><p id="fb2d6569-ec48-4cbc-835a-90c6eedc10fe" class="">→ api setup and database setup information</p><p id="e0243fea-9b6a-47a2-8ef5-ed1e81b8e234" class="">
+</p><p id="14d0ae8a-8c8a-4f6f-991b-590c8e2344b7" class="">let’s test it out if it works fine :)</p></div></p><figure id="5ee4a624-9f12-47c5-8da9-c06fdfaf6340" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.00.42_PM.png"><img style="width:1228px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.00.42_PM.png"/></a></figure><p id="9093e98c-9db0-4113-8d55-6e4b8605c4a0" class=""> → sweeet</p><p id="d7aaae9d-954d-40ed-b22b-5ba0cdf27126" class="">
+</p><p id="93df9ee1-5ef0-43f6-881d-841cc4bce130" class="">then the issue is we want to be able to whenever we make any changes to our server restart the server so that it shows the changes…. in order to do that, we can use the library that we installed called <strong>nodemon</strong> </p><p id="8e2d49e7-63f0-4dba-b233-9f834ca05102" class="">
+</p><figure id="27669873-8b76-4f66-aa5a-a96886787ae0" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled.png"><img style="width:994px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled.png"/></a><figcaption>whenever we run ‘<strong>npm start</strong>’ it should start nodemon and then restart the server whenever we make changes</figcaption></figure><p id="c943d2ee-491b-4700-9afa-e9501b1cd32b" class="">
+</p><h2 id="6cab6545-c4b2-4cc3-8f0b-0698c1ba1e07" class="">Let’s create mongoDB connection. And create GET request</h2><figure id="0e69cb3f-26b9-400d-b82e-323e30f74b69" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%201.png"><img style="width:1294px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%201.png"/></a></figure><p id="8b83d832-32e3-4e10-afb3-a345d6d56b6a" class="">
+</p><ol type="1" id="19051d6b-c392-4173-8c85-d1b6da79cf15" class="numbered-list" start="1"><li>then go to mongodb website then click ‘connect’ </li></ol><figure id="6775caae-8246-4e8e-a025-30997b1b2da1" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%202.png"><img style="width:1524px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%202.png"/></a></figure><ol type="1" id="6ad348fc-c3b1-4c59-9480-30443408851b" class="numbered-list" start="2"><li>click ‘connect using mondoDB compass’</li></ol><figure id="b4da91f8-68fe-4578-808a-8d4eb91b533b" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%203.png"><img style="width:1528px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%203.png"/></a><figcaption>we want to connect to the database in out application and alter the values of the database. But, we want to have a way to actually see the data in the database in our pc. By using this software called ‘MongoDB compass’.</figcaption></figure><p id="da7fb356-11db-4021-9add-36daf219855a" class="">
+</p><figure id="97e665c6-f326-4379-844f-1ee19a554897" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%204.png"><img style="width:1558px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%204.png"/></a><figcaption>what this string represents is the connection string that we will put both use on the mongodb compass and on our mongoose.connect() function.</figcaption></figure><p id="aafbf008-3bfa-458a-bc1d-84bdecbedde5" class="">
+</p><ol type="1" id="e449da1d-e5ab-4c23-8b41-e2ae0be9d896" class="numbered-list" start="3"><li>copy and paste it on mongodb compoass app and hit the connect button.<ul id="cc89e91f-5b03-4bc1-8da0-1720c97b4f33" class="bulleted-list"><li style="list-style-type:disc"><em><span style="border-bottom:0.05em solid">just make sure you change the password</span></em></li></ul><figure id="a8702235-c259-4ddc-94cf-38fc48442dff" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.25.43_PM.png"><img style="width:803px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.25.43_PM.png"/></a></figure></li></ol><p id="c1548345-de46-461e-b986-9e8b46a70b6f" class="">
+</p><p id="82d1aa49-70ab-44c6-93ba-0714f43ad529" class="">then you will see this page</p><figure id="2adf1863-c9f2-477e-b942-ebd7f170093e" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.28.44_PM.png"><img style="width:1047px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.28.44_PM.png"/></a></figure><p id="bec091fa-526a-4598-a627-44d703f34d9b" class="">
+</p><p id="8d17777a-ccd7-4658-ba01-e9798e9c7870" class="">and change the code as well. </p><figure id="74bdd258-a088-414b-b2af-32c1d78e7158" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%205.png"><img style="width:1448px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%205.png"/></a></figure><p id="9f2165d6-06d6-4564-9c37-7bd6aed93923" class="">
+</p><ol type="1" id="badc7cad-db5b-4214-ab39-dbd70b8988e4" class="numbered-list" start="4"><li>one thing that keep in mind is that we need to put actual server link to the code. so we choose ‘Connect your application’ tab instead.<figure id="2cc7723a-7724-4b13-b11e-8a9f4ffc1bc7" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.32.26_PM.png"><img style="width:1566px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.32.26_PM.png"/></a></figure></li></ol><p id="5fb325d4-a807-4765-bf2d-35ef3dea5124" class="">copy and paste it to the code </p><figure id="2bcdfcdc-c2d1-41bb-8a2f-36b897616881" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.37.32_PM.png"><img style="width:1718px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.37.32_PM.png"/></a></figure><p id="c413109a-c23f-4259-9a41-28ac78d5a34e" class="">
+</p><p id="e9235c57-db73-41c3-bb41-fcd7197669f8" class="">but there is one final thing we need to do.</p><p id="9c307a01-c41f-4018-b288-ad6f0f485454" class="">this string url connects to the cluster that we created earlier, but we still need to create a database for this project.</p><p id="e9fbe474-1b7d-4145-b76e-dd00b8a74f84" class="">
+</p><ol type="1" id="fb3499e5-953c-4e72-b7bd-2f592f2b909f" class="numbered-list" start="5"><li>Create database through MongoDB Compass</li></ol><figure id="659e8255-943d-4953-a020-7a8686ddd424" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%206.png"><img style="width:658px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%206.png"/></a><figcaption>hit the ‘Create Database’ button</figcaption></figure><figure id="fe37eefb-d9b3-43d0-91a7-af566babeb6c" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.41.22_PM.png"><img style="width:781px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.41.22_PM.png"/></a><figcaption>sweeeet</figcaption></figure><p id="8aa1a4de-c5fe-4d4c-8b53-91bf0a6f2219" class="">
+</p><p id="a5d748ac-ef62-4787-84fa-0da867adaa54" class="">and copy the name of the data base (‘MERN_Tutorial’)</p><p id="4be02141-fe97-4cd8-8be9-f11651320b4e" class="">and paste it to the code. </p><figure id="163e8500-77e8-4045-b159-44bbfd7cc5f1" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%207.png"><img style="width:1914px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%207.png"/></a><figcaption>to tell mongoDB which database we are connecting to.</figcaption></figure><p id="6593b0de-20a9-4457-959e-399b98afc4f8" class="">
+</p><p id="9438bc7a-97af-47ea-bb59-7c52c1e9a38c" class="">
+</p><h2 id="15ef9a15-2132-4c12-9a11-6d9e3317fc67" class="">Let’s create collections(user table) and models</h2><p id="f2316014-357c-4369-bcc4-5a43e9ba505e" class="">
+</p><p id="f512f393-efeb-4bb6-99fb-0fa0aaab1941" class="">we did create a collection called users, se we want to set the fields, values that exist inside of this collection.</p><p id="c4800892-d4a3-435c-9dfc-af31faa93185" class="">
+</p><ol type="1" id="4ed2c7a4-d281-4baf-934f-bbc3adc50c7d" class="numbered-list" start="1"><li>create ‘models’ folder inside of the ‘server’ folder. </li></ol><figure id="7df2f3bf-8c82-46cf-bcb6-f15ac58fa929" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%208.png"><img style="width:240px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%208.png"/></a><figcaption>every mongoDB project will probably have models folder</figcaption></figure><ol type="1" id="ef101606-3e73-41a2-9c49-04b3ecce7aab" class="numbered-list" start="2"><li>create ‘Users.js’ file (which represent different collections that we have in out database)</li></ol><ol type="1" id="edb8e23a-f67e-4bcb-8ab1-a45078493a0e" class="numbered-list" start="3"><li>Inside of the ‘Users.js’ file, we will define the structure of this model.<figure id="4fef6dd8-e5b3-430e-9349-c427ac3fd366" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.54.54_PM.png"><img style="width:480px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-06_at_11.54.54_PM.png"/></a></figure></li></ol><p id="ff189f29-d073-4b96-9e49-e870915b5af6" class="">what is model…..??</p><p id="1f17bbc0-63e8-424f-a121-67b0b668d6da" class="">
+</p><ol type="1" id="3db21755-62b8-47fa-88b7-4c2acc81d9b6" class="numbered-list" start="4"><li>create a model out of this schema</li></ol><figure id="099ca534-0e25-478c-a2a8-1ac9d5b4f5fb" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%209.png"><img style="width:528px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%209.png"/></a></figure><p id="57f7d518-88e2-45ea-9db0-99b4642b4a5c" class="">
+</p><p id="be069b0b-81c3-4a48-b532-70c9e6d0cac4" class="">great!! we just have a connection to our database </p><p id="a2fb0a20-1fac-4ff8-9123-c781806ce1ea" class="">but we don’t have any way to request data from the database in frontend and we don’t have any way to add data from the frontend to our database.</p><p id="6c13918c-5620-43c7-a312-cf25a6c6c32b" class="">
+</p><ol type="1" id="b2523b31-fec3-4547-b625-0ce7d2b30c95" class="numbered-list" start="5"><li>insert data manually thtough compass app</li></ol><figure id="ba1044d5-5c4d-4374-a389-c2bd08be75fc" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2010.png"><img style="width:288px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2010.png"/></a></figure><figure id="9fed2527-9a51-4536-998e-01e467fad186" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2011.png"><img style="width:384px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2011.png"/></a></figure><p id="73f051fe-9b2d-436a-8da5-efa2a0ede1ba" class="">it is a json file.</p><figure id="eda14253-645f-4ed7-a6f1-95c82dc5ce7f" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2012.png"><img style="width:288px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2012.png"/></a></figure><p id="f803875e-bfbe-4aec-b551-3e2a4acc782c" class="">table created.</p><p id="3a37c20c-f67c-47d7-a23e-13981fa2cacd" class="">
+</p><p id="19a0089c-a0ba-4d9a-9768-6ef1dad3c8c3" class="">in order to tell it to find the data we want, we need to import model that we created.</p><p id="bcb0a325-503a-4fe9-8313-70320384563f" class="">
+</p><ol type="1" id="d879d024-5af1-4c89-8e9f-148205e35a87" class="numbered-list" start="6"><li>create UserModel const and add request function that communicate between backend and frontend</li></ol><figure id="2601b20a-e888-497f-afd0-6b45b8e62759" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2013.png"><img style="width:480px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2013.png"/></a><figcaption>import Users.js</figcaption></figure><p id="4489ac3e-7fe1-4b73-b8c5-12975a004298" class="">
+</p><p id="15134b81-608f-49f5-93d1-d6793e84475f" class="">this is kinda….tricky part….. it is a function that communicate between backend and frontend….. not sure yet.</p><figure id="ebb5de92-f906-43b7-8dce-bd1ed36c5e0e" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-07_at_12.34.00_AM.png"><img style="width:1428px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-07_at_12.34.00_AM.png"/></a></figure><p id="e7a75bca-a6f0-4b09-a12d-03865ff124f6" class="">
+</p><p id="fb28ed39-dbe1-4060-ac7e-77f9bfab9f3f" class="">then how to test out this request works?????</p><p id="c13ec6fe-d6c8-4d1a-9f1c-2992df25e70c" class="">→ install extension called ‘<strong>Thunder Client</strong>’</p><figure id="4af8878d-0e00-4f9d-81a8-6a1f09bb5aab" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-07_at_12.36.32_AM.png"><img style="width:384px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Screen_Shot_2022-07-07_at_12.36.32_AM.png"/></a></figure><p id="8f479ed3-e206-4d5b-b131-26109035b696" class="">
+</p><p id="7e0b7821-fe28-44e6-8a78-89f6e916126d" class="">hit the ‘New Request’ and type ‘http://localhost:3001’</p><p id="cc74dcf2-157c-46a8-88b1-4fea58d6066b" class="">3001 is the link to our api. this is where our api will be running in our pc.</p><p id="b82688ba-698d-42a0-8367-da82fcf72aff" class="">
+</p><p id="472e75b0-9e75-47ed-9070-00d0d535c29b" class="">and ‘Get’ request / endpoint that we created….make sure that we’re making a request to the ‘/getUsers’ route.</p><figure id="e4bd8a66-795b-47d5-89e3-b6b844c3b119" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2014.png"><img style="width:528px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2014.png"/></a></figure><p id="b8ff8b72-236d-4d8a-9f95-d79d167bc4a2" class="">
+</p><p id="4fd48b81-a3c2-4e0d-9e0c-78e99e98888b" class="">then hit the Send button </p><figure id="0ea2cfbf-ce0d-4567-a22b-bd225e14f0de" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2015.png"><img style="width:1690px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2015.png"/></a></figure><p id="9b82987b-fe92-4f08-8b1a-fc4454134426" class="">
+</p><p id="3149140b-0338-46d0-88aa-69fa186470d6" class="">then it returns back the data from our database…..how cool it that???</p><figure id="d4de8d97-f5f9-4697-801d-d3db80d9d82e" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2016.png"><img style="width:432px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2016.png"/></a></figure><p id="0282995c-807d-4a38-a2ab-85ed4b0f35e9" class="">
+</p><p id="7defea0d-ad33-47c8-8e86-3303b3759473" class="">
+</p><h2 id="06bf7869-15ca-46ae-9b75-034e3b814b01" class="">Let’s create POST request → request to add data to our database.</h2><p id="6d79de84-4837-4ecd-8c37-8d1b6afee528" class="">
+</p><p id="a86b9414-afc5-487e-b8ae-d015e223a568" class="">in this case we will use req, res together. </p><ul id="131b0884-ae3c-4a52-b537-58ed6179c1c1" class="bulleted-list"><li style="list-style-type:disc">그럼왜 get에는 res만 사용한거지???</li></ul><figure id="caf6c13a-9c09-47b5-a3d3-972c6d080f05" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2017.png"><img style="width:1688px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2017.png"/></a></figure><ul id="a20d650e-db88-4bc5-97aa-b1733ef0741c" class="bulleted-list"><li style="list-style-type:disc">res.json(user); 이건 뭐지….?</li></ul><p id="5cb4402b-fd21-47b5-a9bb-b33f80480378" class="">
+</p><p id="594e12a8-c0aa-4ed6-b6f3-78f3bb54ea9b" class="">then let’s test it out in thunder client extension!!</p><p id="b97191e1-8d06-4a56-83b3-888baa344ad5" class="">
+</p><figure id="56cd8577-d06c-49a7-a554-be3faab2e5b5" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2018.png"><img style="width:480px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2018.png"/></a></figure><p id="587ad820-4266-4081-8d2e-71fd626099fb" class="">
+</p><p id="6919c11e-8db3-4695-8986-ac2405ba3de3" class=""><mark class="highlight-pink"><strong>but there is an issue……</strong></mark></p><p id="49fe8aa8-a06d-4969-9718-44271c12e325" class="">this is json. but we want to have it as an object.!!!</p><p id="596be420-8ae4-47b0-83d8-35b781288a1e" class="">so we need to parse the json. but we don’t need to do it manually, because express allows you to do that, by just typing this code down below.</p><p id="5cb00c83-c111-4cb0-990c-eba991bdfcac" class="">
+</p><figure id="0da6c880-5ea9-4c0b-a109-939f02365ee2" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2019.png"><img style="width:480px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2019.png"/></a><figcaption>if you don’t do this, then any requests that involve the body will give you an error…</figcaption></figure><p id="b9abe93a-34b6-4112-8121-48cec3d8890f" class="">
+</p><p id="b958fe2e-f053-4e3b-9e6c-be3450b6dbc1" class="">then go to the Compass app and click the refresh button</p><figure id="f5c78eb4-c653-4e48-9a81-9c4f43e66951" class="image"><a href="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2020.png"><img style="width:480px" src="MERN%20FIRST%20APP(Backend)%205ee4a6249f1247c58da9c06fdfaf6340/Untitled%2020.png"/></a><figcaption>sweeeeet.</figcaption></figure><p id="43104f03-1203-4f1d-8e0d-0394e3a7dadd" class="">
+</p><figure id="e378c3e1-78c6-4279-9f59-de71b528b767" class="link-to-page"><a href="https://www.notion.so/Second-part-Frontend-e378c3e178c642799f59de71b528b767">Second part (Frontend)</a></figure><figure id="fa9a792e-6cc6-41ea-bb4b-19c4f347753d" class="link-to-page"><a href="https://www.notion.so/question-fa9a792e6cc641eabb4b19c4f347753d">question</a></figure></div></article></body></html>
