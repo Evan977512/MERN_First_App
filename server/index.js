@@ -33,6 +33,8 @@ mongoose.connect("mongodb+srv://emdwlekr:TBVxY7PnrLhBmUoS@cluster0.wuba1f8.mongo
 // req => we can get information that is sent from the frontend
 // res => we can send information from backoend to the frontend
 app.get("/getUsers", (req, res) => {
+  console.log("hello");
+  console.log(req.body);
   // find() is a method that will return all the data from the database
   // err => error
   // result => the data that is returned from the database
@@ -54,6 +56,7 @@ app.get("/getUsers", (req, res) => {
  * Create POST request to add a new user
  */
 app.post("/createUser", async (req, res) => {
+  // async = 비동기 == 병렬진행
   // when you make a request from the frontend, you can pass it like an object(the name of that object is 'body')
   const user = req.body;
   // create a new user
